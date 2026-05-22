@@ -1,0 +1,161 @@
+[gd_scene format=4 uid="uid://drk7245gdp0r8"]
+
+[ext_resource type="PackedScene" uid="uid://dc4n4onfmd37e" path="res://player.tscn" id="1_hp7xp"]
+[ext_resource type="Texture2D" uid="uid://w1vd7pqducc2" path="res://Cenarios/city 1/1.png" id="10_g52a0"]
+[ext_resource type="Texture2D" uid="uid://bst1s8b3afx3b" path="res://Cenarios/city 1/2.png" id="11_p2ppl"]
+[ext_resource type="Texture2D" uid="uid://1020cj777bir" path="res://Cenarios/city 1/3.png" id="12_6i0bb"]
+[ext_resource type="Texture2D" uid="uid://bxhqr7u8q668y" path="res://Cenarios/city 1/4.png" id="13_3srsw"]
+[ext_resource type="Texture2D" uid="uid://ca5y4taawvcd2" path="res://Cenarios/city 1/5.png" id="14_as3so"]
+[ext_resource type="Texture2D" uid="uid://26twsco78hwd" path="res://Cenarios/city 1/6.png" id="15_b0lte"]
+[ext_resource type="Texture2D" uid="uid://dhoeqmcn637r3" path="res://Cenarios/city 1/7.png" id="16_7ebqh"]
+[ext_resource type="Texture2D" uid="uid://10gyqs4tjna7" path="res://Cenarios/city 1/8.png" id="17_fenod"]
+[ext_resource type="Texture2D" uid="uid://cnpw28vx5rcn0" path="res://Cenarios/city 1/9.png" id="18_w1422"]
+[ext_resource type="Texture2D" uid="uid://bfsu4do3o56e7" path="res://Cenarios/city 1/10.png" id="19_mt4c8"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ktx54"]
+load_path = "res://.godot/imported/IndustrialTile_03.png-a6fc7a40327d5aec9de655be8a73b449.ctex"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hly01"]
+texture = SubResource("CompressedTexture2D_ktx54")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sldv3"]
+load_path = "res://.godot/imported/IndustrialTile_04.png-930cb117a01227da3e2c9d25cbb32d49.ctex"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rb6wm"]
+texture = SubResource("CompressedTexture2D_sldv3")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sb35j"]
+load_path = "res://.godot/imported/IndustrialTile_05.png-f6825b8d7eace675314fc8ce1d7277e8.ctex"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rsegr"]
+texture = SubResource("CompressedTexture2D_sb35j")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xrgq1"]
+load_path = "res://.godot/imported/IndustrialTile_06.png-9c1e7b9e0a83ad09e5bc9bbe19ceb0d9.ctex"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lmytt"]
+texture = SubResource("CompressedTexture2D_xrgq1")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_s5y08"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_hly01")
+sources/1 = SubResource("TileSetAtlasSource_rb6wm")
+sources/2 = SubResource("TileSetAtlasSource_rsegr")
+sources/3 = SubResource("TileSetAtlasSource_lmytt")
+
+[node name="Node2D" type="Node2D" unique_id=1769975921]
+
+[node name="CharacterBody2D" parent="." unique_id=1643653867 instance=ExtResource("1_hp7xp")]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=743075732]
+
+[node name="1" type="ParallaxLayer" parent="ParallaxBackground" unique_id=329129368]
+motion_scale = Vector2(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/1" unique_id=76071053]
+position = Vector2(581, 322.5)
+scale = Vector2(2.0104165, 2.0030863)
+texture = ExtResource("10_g52a0")
+
+[node name="2" type="ParallaxLayer" parent="ParallaxBackground" unique_id=239320088]
+motion_scale = Vector2(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/2" unique_id=112598868]
+position = Vector2(575, 334.00003)
+scale = Vector2(2.0104165, 2.0030863)
+texture = ExtResource("11_p2ppl")
+
+[node name="3" type="ParallaxLayer" parent="ParallaxBackground" unique_id=129900373]
+motion_scale = Vector2(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/3" unique_id=1243435510]
+position = Vector2(581, 322.5)
+scale = Vector2(2.0104165, 2.0030863)
+texture = ExtResource("12_6i0bb")
+
+[node name="4" type="ParallaxLayer" parent="ParallaxBackground" unique_id=2146451402]
+motion_scale = Vector2(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/4" unique_id=2131021379]
+position = Vector2(581, 322.5)
+scale = Vector2(2.0104165, 2.0030863)
+texture = ExtResource("13_3srsw")
+
+[node name="5" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1237048081]
+motion_scale = Vector2(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/5" unique_id=460699497]
+position = Vector2(581, 322.5)
+scale = Vector2(2.0104165, 2.0030863)
+texture = ExtResource("14_as3so")
+
+[node name="6" type="ParallaxLayer" parent="ParallaxBackground" unique_id=914917731]
+motion_scale = Vector2(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/6" unique_id=1140283505]
+position = Vector2(581, 322.5)
+scale = Vector2(2.0104165, 2.0030863)
+texture = ExtResource("15_b0lte")
+
+[node name="7" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1912686223]
+motion_scale = Vector2(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/7" unique_id=21736130]
+position = Vector2(581, 322.5)
+scale = Vector2(2.0104165, 2.0030863)
+texture = ExtResource("16_7ebqh")
+
+[node name="8" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1808355295]
+motion_scale = Vector2(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/8" unique_id=949238887]
+position = Vector2(581, 322.5)
+scale = Vector2(2.0104165, 2.0030863)
+texture = ExtResource("17_fenod")
+
+[node name="9" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1000575243]
+motion_scale = Vector2(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/9" unique_id=1470646652]
+position = Vector2(581, 322.5)
+scale = Vector2(2.0104165, 2.0030863)
+texture = ExtResource("18_w1422")
+
+[node name="10" type="ParallaxLayer" parent="ParallaxBackground" unique_id=330030140]
+motion_scale = Vector2(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/10" unique_id=285010273]
+position = Vector2(581.5, 322.5)
+scale = Vector2(2.0121527, 2.0030863)
+texture = ExtResource("19_mt4c8")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1922278421]
+tile_map_data = PackedByteArray("AAAAACgAAwAAAAAAAAABACgAAwAAAAAAAAACACgAAwAAAAAAAAADACgAAwAAAAAAAAAEACgAAwAAAAAAAAAFACgAAwAAAAAAAAAGACgAAwAAAAAAAAAHACgAAwAAAAAAAAAIACgAAwAAAAAAAAAJACgAAwAAAAAAAAAKACgAAwAAAAAAAAALACgAAwAAAAAAAAAMACgAAwAAAAAAAAANACgAAwAAAAAAAAAOACgAAwAAAAAAAAAPACgAAwAAAAAAAAAgACgAAwAAAAAAAAAhACgAAwAAAAAAAAAiACgAAwAAAAAAAAAjACgAAwAAAAAAAAAkACgAAwAAAAAAAAAlACgAAwAAAAAAAAAnACgAAwAAAAAAAAAoACgAAwAAAAAAAAApACgAAwAAAAAAAAAqACgAAwAAAAAAAAArACgAAwAAAAAAAAAsACgAAwAAAAAAAAAtACgAAwAAAAAAAAAuACgAAwAAAAAAAAAvACgAAwAAAAAAAAAwACgAAwAAAAAAAAAxACgAAwAAAAAAAAAyACgAAwAAAAAAAAAzACgAAwAAAAAAAAA0ACgAAwAAAAAAAAA1ACgAAwAAAAAAAAA2ACgAAwAAAAAAAAA3ACgAAwAAAAAAAAA4ACgAAwAAAAAAAAA5ACgAAwAAAAAAAAA6ACgAAwAAAAAAAAA7ACgAAwAAAAAAAAA8ACgAAwAAAAAAAAA9ACgAAwAAAAAAAAA+ACgAAwAAAAAAAAA/ACgAAwAAAAAAAABAACgAAwAAAAAAAABBACgAAwAAAAAAAABCACgAAwAAAAAAAABDACgAAwAAAAAAAABEACgAAwAAAAAAAABFACgAAwAAAAAAAABGACgAAwAAAAAAAABHACgAAwAAAAAAAABIACgAAwAAAAAAAAAQACgAAAABAAAAAAARACgAAAABAAAAAAASACgAAAABAAAAAAATACgAAAABAAAAAAAUACgAAAABAAAAAAAVACgAAAABAAAAAAAWACgAAAABAAAAAAAXACgAAAABAAAAAAAYACgAAAABAAAAAAAZACgAAAABAAAAAAAaACgAAAABAAAAAAAbACgAAAABAAAAAAAcACgAAAABAAAAAAAdACgAAAABAAAAAAAeACgAAAABAAAAAAAfACgAAAABAAAAAAAmACgAAAABAAAAAAA=")
+tile_set = SubResource("TileSet_s5y08")

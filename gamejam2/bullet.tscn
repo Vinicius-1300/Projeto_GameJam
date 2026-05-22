@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://e3qla6qcleq1"]
+
+[ext_resource type="Script" uid="uid://dnp6v7wq3n66i" path="res://bullet.gd" id="1_v7oki"]
+[ext_resource type="Texture2D" uid="uid://bcdlhnqgsy70j" path="res://Personagens/set arma 1/5 Bullets/7_1.png" id="2_v8qja"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v8qja"]
+size = Vector2(2.5, 1.5)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t4vbm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_v8qja")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[node name="Node2D" type="Area2D" unique_id=498073668]
+script = ExtResource("1_v7oki")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1788181406]
+scale = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_v8qja")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1406801611]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1429880224]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_t4vbm")

@@ -1,0 +1,326 @@
+[gd_scene format=3 uid="uid://i01cdsuotth2"]
+
+[ext_resource type="FontFile" uid="uid://ej25gxbgda8d" path="res://assets/fonts/Orbitron-VariableFont_wght.ttf" id="1_37p78"]
+[ext_resource type="Script" uid="uid://sbwweyyt3hgn" path="res://scripts/hud.gd" id="1_64ctp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_64ctp"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.10756209, 0.14416564, 0.51350695, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8sq4i"]
+bg_color = Color(0.3472438, 0.9999997, 0.3864727, 1)
+shadow_color = Color(0.3472438, 0.9999997, 0.3864727, 1)
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_640wx"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.18340483, 0.24043015, 0.7636642, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a2258"]
+bg_color = Color(0.18340483, 0.24043015, 0.7636642, 1)
+shadow_color = Color(0.18340483, 0.24043015, 0.7636642, 1)
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oo0fn"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.78352344, 0.78352344, 0.78352326, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="LabelSettings" id="LabelSettings_oo0fn"]
+font_size = 5
+outline_size = 1
+
+[node name="HUD" type="CanvasLayer" unique_id=102744645 groups=["hud"]]
+script = ExtResource("1_64ctp")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1839126933]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Control" type="Control" parent="MarginContainer" unique_id=720666778]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="BoxEsquerda" type="VBoxContainer" parent="MarginContainer/Control" unique_id=778696028]
+layout_mode = 1
+offset_right = 300.0
+offset_bottom = 44.0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+
+[node name="BarraVida" type="ProgressBar" parent="MarginContainer/Control/BoxEsquerda" unique_id=1973901332]
+custom_minimum_size = Vector2(300, 25)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_64ctp")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8sq4i")
+value = 100.0
+show_percentage = false
+
+[node name="TextoVida" type="Label" parent="MarginContainer/Control/BoxEsquerda/BarraVida" unique_id=579676330]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BarraEscudo" type="ProgressBar" parent="MarginContainer/Control/BoxEsquerda" unique_id=471460120]
+custom_minimum_size = Vector2(150, 15)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_640wx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_a2258")
+value = 100.0
+show_percentage = false
+
+[node name="TextoEscudo" type="Label" parent="MarginContainer/Control/BoxEsquerda/BarraEscudo" unique_id=1893270224]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BoxDireita" type="VBoxContainer" parent="MarginContainer/Control" unique_id=1214837943]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -97.0
+offset_top = -30.0
+offset_right = 6.0
+offset_bottom = 59.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_constants/separation = 5
+alignment = 2
+
+[node name="LabelAmmo" type="Label" parent="MarginContainer/Control/BoxDireita" unique_id=1693761003]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_37p78")
+theme_override_font_sizes/font_size = 16
+text = "Heat"
+horizontal_alignment = 2
+
+[node name="BarraCalor" type="ProgressBar" parent="MarginContainer/Control/BoxDireita" unique_id=513837594]
+layout_mode = 2
+show_percentage = false
+
+[node name="Linha" type="ColorRect" parent="MarginContainer/Control/BoxDireita" unique_id=417838735]
+custom_minimum_size = Vector2(100, 2)
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="LabelArma" type="Label" parent="MarginContainer/Control/BoxDireita" unique_id=171517475]
+layout_mode = 2
+text = "Arma: Pistola"
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/Control" unique_id=1374319667]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/Control/CenterContainer" unique_id=356742778]
+custom_minimum_size = Vector2(4, 4)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MinigameResfriamento" type="ColorRect" parent="." unique_id=1890225573]
+offset_left = 347.0
+offset_top = 327.0
+offset_right = 647.0
+offset_bottom = 347.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0.3156973, 0.011924234, 2.4065375e-08, 1)
+
+[node name="ZonaVerde" type="ColorRect" parent="MinigameResfriamento" unique_id=1066234481]
+layout_mode = 0
+offset_left = 45.0
+offset_right = 75.0
+offset_bottom = 20.0
+color = Color(0.15770397, 0.6225167, 0, 1)
+
+[node name="ZonaAmarela" type="ColorRect" parent="MinigameResfriamento" unique_id=1873192503]
+layout_mode = 0
+offset_left = 150.0
+offset_right = 210.0
+offset_bottom = 20.0
+color = Color(1, 1, 0, 1)
+
+[node name="Cursor" type="ColorRect" parent="MinigameResfriamento" unique_id=562109908]
+custom_minimum_size = Vector2(4, 28)
+layout_mode = 0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 24.0
+
+[node name="PainelInimigo" type="ColorRect" parent="." unique_id=1374182656]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -125.0
+offset_top = 40.0
+offset_right = 125.0
+offset_bottom = 100.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 0.003921569)
+
+[node name="NomeInimigo" type="Label" parent="PainelInimigo" unique_id=1277195333]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+horizontal_alignment = 1
+
+[node name="BarraVidaInimigo" type="ProgressBar" parent="PainelInimigo" unique_id=837645610]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -27.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.13026485, 0.9660818, 0.296617, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1973010622]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -146.0
+offset_right = 72.0
+offset_bottom = -55.0
+grow_vertical = 0
+theme_override_constants/separation = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1300303663]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer" unique_id=1400585637]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_oo0fn")
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer" unique_id=598322579]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_37p78")
+theme_override_font_sizes/font_size = 6
+text = "R"
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=1017557573]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_37p78")
+theme_override_font_sizes/font_size = 7
+text = "Corpo a Corpo"
+label_settings = SubResource("LabelSettings_oo0fn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=1218748584]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer" unique_id=1123165094]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/VBoxContainer/HBoxContainer" unique_id=206006853]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_oo0fn")
+
+[node name="Label2" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer/PanelContainer" unique_id=1927232979]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_37p78")
+theme_override_font_sizes/font_size = 6
+text = "M1"
+
+[node name="Label" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer" unique_id=734722212]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_37p78")
+theme_override_font_sizes/font_size = 7
+text = "Atirar"
+label_settings = SubResource("LabelSettings_oo0fn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/VBoxContainer" unique_id=833254076]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/VBoxContainer" unique_id=1843280324]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=475248940]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_oo0fn")
+
+[node name="Label2" type="Label" parent="VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/PanelContainer" unique_id=1222111990]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_37p78")
+theme_override_font_sizes/font_size = 6
+text = "Shift"
+
+[node name="Label" type="Label" parent="VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=864228711]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_37p78")
+theme_override_font_sizes/font_size = 7
+text = "Correr"
+label_settings = SubResource("LabelSettings_oo0fn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/VBoxContainer/VBoxContainer" unique_id=631099524]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/VBoxContainer/VBoxContainer" unique_id=824274630]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=1233956105]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_oo0fn")
+
+[node name="Label2" type="Label" parent="VBoxContainer/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/PanelContainer" unique_id=1016098636]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_37p78")
+theme_override_font_sizes/font_size = 6
+text = "Space"
+
+[node name="Label" type="Label" parent="VBoxContainer/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=229277283]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_37p78")
+theme_override_font_sizes/font_size = 7
+text = "Espaço"
+label_settings = SubResource("LabelSettings_oo0fn")

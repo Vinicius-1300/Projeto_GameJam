@@ -1,0 +1,223 @@
+[gd_scene format=3 uid="uid://dh8mf267l350h"]
+
+[ext_resource type="Script" uid="uid://b7hjexsg1lvnd" path="res://scripts/menu_configuracoes.gd" id="1_q4pw0"]
+[ext_resource type="Gradient" uid="uid://ddvc4d5wl3yjb" path="res://assets/ui/FundoPadrao.tres" id="2_j6yn5"]
+[ext_resource type="FontFile" uid="uid://ej25gxbgda8d" path="res://assets/fonts/Orbitron-VariableFont_wght.ttf" id="3_ihu88"]
+[ext_resource type="Texture2D" uid="uid://b8ggtdgrycy7f" path="res://assets/ui/slider_puxador.png" id="4_l8x5x"]
+[ext_resource type="Texture2D" uid="uid://b5x182db04sfj" path="res://assets/ui/checkbox_marcado.png" id="5_ggilb"]
+[ext_resource type="Texture2D" uid="uid://dbd64qbshimec" path="res://assets/ui/checkbox_vazio.png" id="6_xj1a1"]
+[ext_resource type="StyleBox" uid="uid://clm7qu122ew8x" path="res://assets/ui/BotaoPadrao.tres" id="7_8jlk4"]
+[ext_resource type="StyleBox" uid="uid://c48dvhjqn08d4" path="res://assets/ui/BotaoPress.tres" id="8_ypxqq"]
+[ext_resource type="StyleBox" uid="uid://codogyi8qlvv3" path="res://assets/ui/BotaoFocus.tres" id="9_lbx1t"]
+[ext_resource type="AudioStream" uid="uid://3agw4qlsrxg6" path="res://assets/Music/Appearing Nowhere (feat. Rusty James Miller) - Zenith Bikini.mp3" id="10_0wjil"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jdto2"]
+gradient = ExtResource("2_j6yn5")
+width = 1024
+height = 1024
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_r0kfq"]
+font = ExtResource("3_ihu88")
+font_size = 40
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_3jljg"]
+color = Color(0.18000486, 0.18000486, 0.18000486, 1)
+thickness = 3
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_xmaef"]
+color = Color(0, 0, 0.9019608, 1)
+thickness = 3
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_xua4b"]
+color = Color(0, 0, 0.9019608, 1)
+thickness = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c03sr"]
+bg_color = Color(0.101960786, 0.13725491, 0.49411765, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qkb3a"]
+bg_color = Color(0.101960786, 0.13725491, 0.49411765, 1)
+
+[sub_resource type="Theme" id="Theme_e12ht"]
+PopupMenu/font_sizes/font_size = 24
+PopupMenu/fonts/font = ExtResource("3_ihu88")
+PopupMenu/styles/hover = SubResource("StyleBoxFlat_c03sr")
+PopupMenu/styles/panel = SubResource("StyleBoxFlat_qkb3a")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xua4b"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_color = Color(0.101960786, 0.13725491, 0.49411765, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c03sr"]
+
+[node name="MenuConfiguracoes" type="Control" unique_id=963939792]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q4pw0")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1681561408]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_jdto2")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=107063874]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=68676871]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=462064318]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 100
+text = "CONFIGURAÇÕES"
+label_settings = SubResource("LabelSettings_r0kfq")
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer" unique_id=1927811700]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer" unique_id=397645387]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Volume Geral"
+label_settings = SubResource("LabelSettings_r0kfq")
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/VBoxContainer" unique_id=2064073882]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_icons/grabber = ExtResource("4_l8x5x")
+theme_override_icons/grabber_highlight = ExtResource("4_l8x5x")
+theme_override_styles/slider = SubResource("StyleBoxLine_3jljg")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_xmaef")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_xua4b")
+max_value = 1.0
+step = 0.01
+value = 0.1
+
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer" unique_id=853942877]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Volume da Música"
+label_settings = SubResource("LabelSettings_r0kfq")
+
+[node name="HSlider2" type="HSlider" parent="MarginContainer/VBoxContainer" unique_id=529438005]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_icons/grabber = ExtResource("4_l8x5x")
+theme_override_icons/grabber_highlight = ExtResource("4_l8x5x")
+theme_override_styles/slider = SubResource("StyleBoxLine_3jljg")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_xmaef")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_xua4b")
+max_value = 1.0
+step = 0.01
+value = 0.1
+
+[node name="Label4" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1406584537]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Efeitos Sonoros"
+label_settings = SubResource("LabelSettings_r0kfq")
+
+[node name="HSlider3" type="HSlider" parent="MarginContainer/VBoxContainer" unique_id=1499411731]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_icons/grabber = ExtResource("4_l8x5x")
+theme_override_icons/grabber_highlight = ExtResource("4_l8x5x")
+theme_override_styles/slider = SubResource("StyleBoxLine_3jljg")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_xmaef")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_xua4b")
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="CheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer" unique_id=1722373522]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_ihu88")
+theme_override_font_sizes/font_size = 50
+theme_override_icons/checked = ExtResource("5_ggilb")
+theme_override_icons/unchecked = ExtResource("6_xj1a1")
+text = "Tela Cheia"
+
+[node name="CheckBox2" type="CheckBox" parent="MarginContainer/VBoxContainer" unique_id=417153531]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_ihu88")
+theme_override_font_sizes/font_size = 50
+theme_override_icons/checked = ExtResource("5_ggilb")
+theme_override_icons/unchecked = ExtResource("6_xj1a1")
+text = "V-SYNC
+"
+
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer" unique_id=408347524]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_e12ht")
+theme_override_fonts/font = ExtResource("3_ihu88")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_xua4b")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xua4b")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_c03sr")
+
+[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer" unique_id=1215506797]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer" unique_id=772552138]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.32941177, 0.8235294, 1, 1)
+theme_override_fonts/font = ExtResource("3_ihu88")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("7_8jlk4")
+theme_override_styles/pressed = ExtResource("8_ypxqq")
+theme_override_styles/hover = ExtResource("9_lbx1t")
+theme_override_styles/focus = ExtResource("9_lbx1t")
+text = "Voltar para o jogo"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=942605987]
+process_mode = 3
+stream = ExtResource("10_0wjil")
+bus = &"Musica"
+
+[node name="Fade" type="ColorRect" parent="." unique_id=1158039069]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/HSlider2" to="." method="_on_h_slider_2_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/HSlider3" to="." method="_on_h_slider_3_value_changed"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/CheckBox" to="." method="_on_check_box_toggled"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/CheckBox2" to="." method="_on_check_box_2_toggled"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

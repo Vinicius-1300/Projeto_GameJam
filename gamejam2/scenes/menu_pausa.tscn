@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://clrk62rq7bi8t"]
+
+[ext_resource type="Script" uid="uid://dd1bw5x6rno2" path="res://scripts/menu_pausa.gd" id="1_jd2x8"]
+[ext_resource type="FontFile" uid="uid://ej25gxbgda8d" path="res://assets/fonts/Orbitron-VariableFont_wght.ttf" id="2_3ml7n"]
+[ext_resource type="Gradient" uid="uid://ddvc4d5wl3yjb" path="res://assets/ui/FundoPadrao.tres" id="2_f0gls"]
+[ext_resource type="PackedScene" uid="uid://dh8mf267l350h" path="res://scenes/menu_configuracoes.tscn" id="3_tyo0u"]
+[ext_resource type="StyleBox" uid="uid://clm7qu122ew8x" path="res://assets/ui/BotaoPadrao.tres" id="4_wj3hg"]
+[ext_resource type="StyleBox" uid="uid://c48dvhjqn08d4" path="res://assets/ui/BotaoPress.tres" id="5_8eh7v"]
+[ext_resource type="StyleBox" uid="uid://dswyaxjohkyaa" path="res://assets/ui/BotaoHover.tres" id="6_4gd8f"]
+[ext_resource type="StyleBox" uid="uid://codogyi8qlvv3" path="res://assets/ui/BotaoFocus.tres" id="7_0ajiv"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kso7j"]
+gradient = ExtResource("2_f0gls")
+width = 1024
+height = 1024
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 1)
+
+[node name="MenuPausa" type="CanvasLayer" unique_id=63572861]
+process_mode = 3
+visible = false
+script = ExtResource("1_jd2x8")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1866202525]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_kso7j")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1930594089]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=113616636]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Continuar" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1150707014]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.32941177, 0.8235294, 1, 1)
+theme_override_fonts/font = ExtResource("2_3ml7n")
+theme_override_styles/normal = ExtResource("4_wj3hg")
+theme_override_styles/pressed = ExtResource("5_8eh7v")
+theme_override_styles/hover = ExtResource("6_4gd8f")
+theme_override_styles/focus = ExtResource("7_0ajiv")
+text = "Continuar"
+
+[node name="Configuracoes" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1660581743]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.32941177, 0.8235294, 1, 1)
+theme_override_fonts/font = ExtResource("2_3ml7n")
+theme_override_styles/normal = ExtResource("4_wj3hg")
+theme_override_styles/pressed = ExtResource("5_8eh7v")
+theme_override_styles/hover = ExtResource("6_4gd8f")
+theme_override_styles/focus = ExtResource("7_0ajiv")
+text = "Configurações"
+
+[node name="Sair" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1222903182]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.32941177, 0.8235294, 1, 1)
+theme_override_fonts/font = ExtResource("2_3ml7n")
+theme_override_styles/normal = ExtResource("4_wj3hg")
+theme_override_styles/pressed = ExtResource("5_8eh7v")
+theme_override_styles/hover = ExtResource("6_4gd8f")
+theme_override_styles/focus = ExtResource("7_0ajiv")
+text = "Voltar para o menu principal"
+
+[node name="SairDoJogo" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1721908701]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.32941177, 0.8235294, 1, 1)
+theme_override_fonts/font = ExtResource("2_3ml7n")
+theme_override_styles/normal = ExtResource("4_wj3hg")
+theme_override_styles/pressed = ExtResource("5_8eh7v")
+theme_override_styles/hover = ExtResource("6_4gd8f")
+theme_override_styles/focus = ExtResource("7_0ajiv")
+text = "Sair do jogo
+"
+
+[node name="MenuConfiguracoes" parent="." unique_id=963939792 instance=ExtResource("3_tyo0u")]
+visible = false
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Continuar" to="." method="_on_continuar_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Configuracoes" to="." method="_on_configuracoes_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Sair" to="." method="_on_sair_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/SairDoJogo" to="." method="_on_sair_do_jogo_pressed"]

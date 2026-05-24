@@ -12,13 +12,12 @@ func _on_body_entered(body: Node) -> void:
 	if hit:
 		return
 	if body.is_in_group("villain"):
-		body.take_damage(20)  # ajuste o dano aqui
+		body.take_damage(20)  
 		queue_free()
 
 func setup(dir: int) -> void:
 	direction = dir
 	animation.flip_h = dir < 0
-	# Só toca animação se ela existir
 	if animation.sprite_frames and animation.sprite_frames.has_animation("default"):
 		animation.play("default")
 		animation.animation_finished.connect(_on_animation_finished)
@@ -27,7 +26,6 @@ func _process(delta: float) -> void:
 	position.x += SPEED * direction * delta
 
 func _on_animation_finished() -> void:
-	# Só deleta se a animação não for em loop
 	if not animation.sprite_frames.get_animation_loop("default"):
 		queue_free()
 

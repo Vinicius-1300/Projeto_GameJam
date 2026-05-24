@@ -1,0 +1,128 @@
+[gd_scene format=3 uid="uid://bvl0ae1cet783"]
+
+[sub_resource type="GDScript" id="GDScript_3qfmy"]
+script/source = "extends StaticBody3D
+
+@onready var mesh = $MeshInstance3D
+@onready var label_dano = $Label3D
+
+var cena_pedaco = preload(\"res://scenes/pedaco_dummy.tscn\")
+
+var vida: float = 100.0
+var cor_original: Color
+var material_unico: StandardMaterial3D
+var esta_morto: bool = false
+
+var aura_raiox: MeshInstance3D
+
+func _ready() -> void:
+	add_to_group(\"destacaveis\")
+	criar_aura_raio_x()
+	
+	var mat_original = mesh.get_active_material(0)
+	if mat_original:
+		material_unico = mat_original.duplicate()
+		mesh.set_surface_override_material(0, material_unico)
+		cor_original = material_unico.albedo_color
+	
+	label_dano.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	label_dano.text = \"\"
+
+func criar_aura_raio_x() -> void:
+	aura_raiox = MeshInstance3D.new()
+	var malha = BoxMesh.new() # O Dummy usa caixa, então a aura é quadrada
+	malha.size = Vector3(1.1, 2.1, 1.1)
+	aura_raiox.mesh = malha
+	
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = Color(1.0, 0.2, 0.2, 0.3)
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.emission_enabled = true
+	mat.emission = Color(1.0, 0.0, 0.0)
+	mat.no_depth_test = true
+	
+	aura_raiox.material_override = mat
+	aura_raiox.visible = false
+	add_child(aura_raiox)
+
+func ativar_raio_x(ativo: bool) -> void:
+	if not esta_morto and aura_raiox:
+		aura_raiox.visible = ativo
+
+func receber_dano(qtd: float, _tipo_dano: String = \"normal\") -> void:
+	if esta_morto: return
+	
+	vida -= qtd
+	mostrar_texto_dano(qtd)
+	
+	if vida <= 0:
+		vida = 0
+		if _tipo_dano == \"fisico\":
+			var jogador = get_tree().current_scene.find_child(\"Player\", true, false)
+			if jogador and jogador.has_method(\"resfriar_arma\"):
+				jogador.resfriar_arma(25.0)
+		morrer()
+	else:
+		efeito_impacto()
+
+func mostrar_texto_dano(qtd: float) -> void:
+	label_dano.text = str(qtd)
+	label_dano.modulate = Color.RED
+	label_dano.modulate.a = 1.0 
+	
+	var tween = create_tween()
+	tween.tween_property(label_dano, \"position:y\", 2.5, 0.4).from(1.5)
+	tween.parallel().tween_property(label_dano, \"modulate:a\", 0.0, 0.4)
+	tween.tween_callback(func(): label_dano.text = \"\")
+
+func efeito_impacto() -> void:
+	if not material_unico: return
+	
+	var tween = create_tween()
+	material_unico.albedo_color = Color.RED
+	tween.tween_property(material_unico, \"albedo_color\", cor_original, 0.2)
+	
+	tween.parallel().tween_property(mesh, \"scale\", Vector3(1.2, 0.8, 1.2), 0.1)
+	tween.tween_property(mesh, \"scale\", Vector3(1.0, 1.0, 1.0), 0.1)
+
+func morrer() -> void:
+	esta_morto = true
+	ativar_raio_x(false)
+	$CollisionShape3D.set_deferred(\"disabled\", true)
+	mesh.visible = false
+	label_dano.visible = false
+	
+	for i in range(15):
+		var pedaco = cena_pedaco.instantiate()
+		get_tree().current_scene.add_child(pedaco)
+		
+		var desvio_posicao = Vector3(randf_range(-0.5, 0.5), randf_range(0.5, 1.5), randf_range(-0.5, 0.5))
+		pedaco.global_position = global_position + desvio_posicao
+		
+		var forca_explosao = Vector3(randf_range(-8.0, 8.0), randf_range(5.0, 12.0), randf_range(-8.0, 8.0))
+		pedaco.apply_central_impulse(forca_explosao)	
+		
+		var forca_giro = Vector3(randf_range(-10.0, 10.0), randf_range(-10.0, 10.0), randf_range(-10.0, 10.0))
+		pedaco.apply_torque_impulse(forca_giro)
+	
+	queue_free()
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xmspm"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_gcxmu"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_xmspm")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0umox"]
+
+[node name="Dummy" type="StaticBody3D" unique_id=542659207]
+script = SubResource("GDScript_3qfmy")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1273449465]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2093187401]
+mesh = SubResource("CylinderMesh_gcxmu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1308135123]
+shape = SubResource("CylinderShape3D_0umox")

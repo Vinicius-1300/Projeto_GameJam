@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://5u4hoyuf6ogu"]
 
-[ext_resource type="Script" uid="uid://b40wg5udogm7t" path="res://villain_bullet.gd" id="1_kqgnm"]
+[ext_resource type="Script" uid="uid://b40wg5udogm7t" path="res://scripts/villain_bullet.gd" id="1_kqgnm"]
 [ext_resource type="Texture2D" uid="uid://cmc2kqy3huy2m" path="res://Personagens/2/Projectile.png" id="2_5drfx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vov87"]
@@ -8,6 +8,7 @@ radius = 20.0
 height = 44.0
 
 [node name="Node2D" type="Area2D" unique_id=1721101900]
+collision_mask = 2
 script = ExtResource("1_kqgnm")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1576422975]

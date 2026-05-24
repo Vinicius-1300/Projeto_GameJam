@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b23e3gty4yhfl"]
 
-[ext_resource type="Script" uid="uid://bmwtr7q5daujq" path="res://villain.gd" id="1_jun2i"]
+[ext_resource type="Script" uid="uid://bmwtr7q5daujq" path="res://scripts/villain.gd" id="1_jun2i"]
 [ext_resource type="Texture2D" uid="uid://2818mxj460vk" path="res://Personagens/2/Attack2.png" id="2_fe1vl"]
 [ext_resource type="Texture2D" uid="uid://b5idip267716w" path="res://Personagens/2/Attack3.png" id="3_x2dv3"]
 [ext_resource type="Texture2D" uid="uid://c41fevc2qiu6j" path="res://Personagens/2/Death.png" id="4_nyhea"]
@@ -303,20 +303,33 @@ animations = [{
 radius = 20.0
 height = 108.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w27pn"]
+radius = 20.0
+height = 104.0
+
 [node name="Villain" type="CharacterBody2D" unique_id=467002680 groups=["villain"]]
-position = Vector2(4, 10)
 script = ExtResource("1_jun2i")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=483904161]
-position = Vector2(610, 488.00003)
+position = Vector2(36, -11)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_hfloi")
 animation = &"special"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1910098259]
-position = Vector2(574, 535)
+position = Vector2(-2, 33)
 shape = SubResource("CapsuleShape2D_pwpti")
 
 [node name="ShootPoint" type="Marker2D" parent="." unique_id=1961427672]
-position = Vector2(627, 519)
+position = Vector2(23, 21)
+
+[node name="HitboxContato" type="Area2D" parent="." unique_id=1658864050]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxContato" unique_id=1838196725]
+position = Vector2(-1, 35)
+shape = SubResource("CapsuleShape2D_w27pn")
+
+[connection signal="body_entered" from="HitboxContato" to="." method="_on_hitbox_contato_body_entered"]

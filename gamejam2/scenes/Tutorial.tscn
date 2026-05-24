@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://drk7245gdp0r8"]
 
-[ext_resource type="PackedScene" uid="uid://dc4n4onfmd37e" path="res://player.tscn" id="1_hp7xp"]
+[ext_resource type="PackedScene" uid="uid://dc4n4onfmd37e" path="res://scenes/player.tscn" id="1_hp7xp"]
 [ext_resource type="Texture2D" uid="uid://w1vd7pqducc2" path="res://Cenarios/city 1/1.png" id="10_g52a0"]
 [ext_resource type="Texture2D" uid="uid://bst1s8b3afx3b" path="res://Cenarios/city 1/2.png" id="11_p2ppl"]
 [ext_resource type="Texture2D" uid="uid://1020cj777bir" path="res://Cenarios/city 1/3.png" id="12_6i0bb"]

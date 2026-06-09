@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c2sc3f53edmff" path="res://assets/ui/Tigresa de ferro.png" id="4_rtw2f"]
 [ext_resource type="StyleBox" uid="uid://codogyi8qlvv3" path="res://assets/ui/BotaoFocus.tres" id="5_5dd4i"]
 [ext_resource type="Texture2D" uid="uid://drmbyeqpf88v0" path="res://assets/ui/Mouse.png" id="6_lgwnu"]
+[ext_resource type="AudioStream" uid="uid://ylau22sqaa2v" path="res://assets/Music/starlight-gateway.mp3" id="7_oa1go"]
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_nlkkf"]
 gradient = ExtResource("2_oa1go")
@@ -630,3 +631,9 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1442311210]
+stream = ExtResource("7_oa1go")
+autoplay = true
+bus = &"Musica"
+parameters/looping = true

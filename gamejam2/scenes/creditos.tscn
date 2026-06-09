@@ -6,6 +6,7 @@
 [ext_resource type="StyleBox" uid="uid://c48dvhjqn08d4" path="res://assets/ui/BotaoPress.tres" id="4_lrn2f"]
 [ext_resource type="StyleBox" uid="uid://dswyaxjohkyaa" path="res://assets/ui/BotaoHover.tres" id="5_3ghxt"]
 [ext_resource type="StyleBox" uid="uid://codogyi8qlvv3" path="res://assets/ui/BotaoFocus.tres" id="6_n1vwi"]
+[ext_resource type="AudioStream" uid="uid://ylau22sqaa2v" path="res://assets/Music/starlight-gateway.mp3" id="7_ufadv"]
 
 [node name="Creditos" type="Control" unique_id=712771961]
 layout_mode = 3
@@ -76,5 +77,11 @@ theme_override_styles/pressed = ExtResource("4_lrn2f")
 theme_override_styles/hover = ExtResource("5_3ghxt")
 theme_override_styles/focus = ExtResource("6_n1vwi")
 text = "Voltar"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=561562840]
+stream = ExtResource("7_ufadv")
+autoplay = true
+bus = &"Musica"
+parameters/looping = true
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

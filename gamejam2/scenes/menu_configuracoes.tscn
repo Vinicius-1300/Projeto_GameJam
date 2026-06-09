@@ -9,7 +9,7 @@
 [ext_resource type="StyleBox" uid="uid://clm7qu122ew8x" path="res://assets/ui/BotaoPadrao.tres" id="7_8jlk4"]
 [ext_resource type="StyleBox" uid="uid://c48dvhjqn08d4" path="res://assets/ui/BotaoPress.tres" id="8_ypxqq"]
 [ext_resource type="StyleBox" uid="uid://codogyi8qlvv3" path="res://assets/ui/BotaoFocus.tres" id="9_lbx1t"]
-[ext_resource type="AudioStream" uid="uid://3agw4qlsrxg6" path="res://assets/Music/Appearing Nowhere (feat. Rusty James Miller) - Zenith Bikini.mp3" id="10_0wjil"]
+[ext_resource type="AudioStream" uid="uid://ylau22sqaa2v" path="res://assets/Music/starlight-gateway.mp3" id="10_q4pw0"]
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_jdto2"]
 gradient = ExtResource("2_j6yn5")
@@ -201,8 +201,9 @@ text = "Voltar para o jogo"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=942605987]
 process_mode = 3
-stream = ExtResource("10_0wjil")
+stream = ExtResource("10_q4pw0")
 bus = &"Musica"
+parameters/looping = true
 
 [node name="Fade" type="ColorRect" parent="." unique_id=1158039069]
 layout_mode = 1

@@ -41,11 +41,11 @@ const BulletScene = preload("res://scenes/villain_bullet.tscn")
 var player: CharacterBody2D = null
 var playercollision: CollisionShape2D = null
 
-# --- Refêrencia do Hud ---
 var hud = null
 
-# --- Áudio Provisório ---
+# --- Áudio ---
 var sfx_hurt: AudioStreamPlayer
+var sfx_shoot: AudioStreamPlayer
 
 func _ready() -> void:
 	add_to_group("villain")
@@ -55,8 +55,15 @@ func _ready() -> void:
 	
 	sfx_hurt = AudioStreamPlayer.new()
 	add_child(sfx_hurt)
-	sfx_hurt.stream = _gerar_bip_provisorio(130.81, 0.15) 
+	sfx_hurt.stream = load("res://assets/SFX/dano-chefe.mp3") 
 	sfx_hurt.volume_db = -4.0
+	sfx_hurt.bus = "SFX"
+
+	sfx_shoot = AudioStreamPlayer.new()
+	add_child(sfx_shoot)
+	sfx_shoot.stream = load("res://assets/SFX/tiro-chefe.mp3") 
+	sfx_shoot.volume_db = -6.0
+	sfx_shoot.bus = "SFX"
 
 func _physics_process(delta: float) -> void:
 	if not player:
@@ -69,7 +76,6 @@ func _physics_process(delta: float) -> void:
 	if not hud:
 		hud = get_tree().get_first_node_in_group("hud")
 
-	# Física do Knockback
 	if is_dead or is_hurt:
 		if not is_on_floor():
 			velocity += get_gravity() * delta
@@ -176,6 +182,8 @@ func _do_special() -> void:
 	animation.play("special")
 
 func _spawn_bullet() -> void:
+	if sfx_shoot:
+		sfx_shoot.play()
 	var bullet = BulletScene.instantiate()
 	get_parent().add_child(bullet)
 	bullet.global_position = shoot_point.global_position
@@ -252,28 +260,3 @@ func _on_hitbox_contato_body_entered(body: Node2D) -> void:
 		var direcao_empurrao = -1 if global_position.x > body.global_position.x else 1
 		body.velocity.x = 600.0 * direcao_empurrao
 		body.velocity.y = -200.0
-
-# --- Gerador de som via código ---
-func _gerar_bip_provisorio(frequencia: float, duracao: float) -> AudioStreamWAV:
-	var stream = AudioStreamWAV.new()
-	stream.format = AudioStreamWAV.FORMAT_16_BITS
-	stream.mix_rate = 44100
-	stream.stereo = false
-	
-	var total_amostras = int(stream.mix_rate * duracao)
-	var bytes = PackedByteArray()
-	bytes.resize(total_amostras * 2) 
-	
-	for i in range(total_amostras):
-		var t = float(i) / stream.mix_rate
-		var amostra = sin(t * frequencia * 2.0 * PI)
-		
-		if i > total_amostras * 0.8:
-			var fator_fade = float(total_amostras - i) / (total_amostras * 0.2)
-			amostra *= fator_fade
-			
-		var valor_int = int(amostra * 32767.0) 
-		bytes.encode_s16(i * 2, valor_int)
-		
-	stream.data = bytes
-	return stream

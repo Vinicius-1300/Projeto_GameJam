@@ -6,9 +6,8 @@ extends CharacterBody2D
 
 # --- Áudio --
 var sfx_shoot: AudioStreamPlayer
-var sfx_death: AudioStreamPlayer
-var sfx_melee_hit: AudioStreamPlayer
 var sfx_hurt: AudioStreamPlayer
+var sfx_jump: AudioStreamPlayer
 
 const SPEED = 200.0
 const RUN_SPEED = 400.0
@@ -49,34 +48,31 @@ var is_overheated = false
 
 var is_minigame_active = false
 var minigame_progress = 0.0
-const MINIGAME_SPEED = 0.5     
+const MINIGAME_SPEED = 0.31     
 
-# --- Limite de queda para causar morte no jogador, caso ele passe da parede ---
+# --- Limite de queda ---
 const FALL_LIMIT = 800.0
 
 func _ready() -> void:
 	add_to_group("player")
 	
-	# Sons por script:
 	sfx_shoot = AudioStreamPlayer.new()
 	add_child(sfx_shoot)
-	sfx_shoot.stream = _gerar_bip_provisorio(587.33, 0.08) 
+	sfx_shoot.stream = load("res://assets/SFX/tiro-kayla.mp3") 
 	sfx_shoot.volume_db = -10.0 
+	sfx_shoot.bus = "SFX"
 	
-	sfx_death = AudioStreamPlayer.new()
-	add_child(sfx_death)
-	sfx_death.stream = _gerar_bip_provisorio(146.83, 0.4) 
-	sfx_death.volume_db = -5.0
-
-	sfx_melee_hit = AudioStreamPlayer.new()
-	add_child(sfx_melee_hit)
-	sfx_melee_hit.stream = _gerar_bip_provisorio(880.0, 0.06) 
-	sfx_melee_hit.volume_db = -8.0
-
 	sfx_hurt = AudioStreamPlayer.new()
 	add_child(sfx_hurt)
-	sfx_hurt.stream = _gerar_bip_provisorio(220.0, 0.12) 
+	sfx_hurt.stream = load("res://assets/SFX/dano-kayla.mp3") 
 	sfx_hurt.volume_db = -6.0
+	sfx_hurt.bus = "SFX"
+
+	sfx_jump = AudioStreamPlayer.new()
+	add_child(sfx_jump)
+	sfx_jump.stream = load("res://assets/SFX/som-pulo.mp3") 
+	sfx_jump.volume_db = -8.0
+	sfx_jump.bus = "SFX"
 
 func _physics_process(delta: float) -> void:
 	if not hud:
@@ -87,11 +83,9 @@ func _physics_process(delta: float) -> void:
 			hud.atualizar_arma("Pistola")
 			hud.atualizar_calor(current_heat, max_heat, is_overheated)
 
-	# Verificação do limite de quedra
 	if global_position.y > FALL_LIMIT and not is_dead:
 		take_damage(hp + shield)
 
-	# Lógica do I-frame
 	if is_invulnerable:
 		invuln_timer -= delta
 		if invuln_timer <= 0:
@@ -126,10 +120,33 @@ func _physics_process(delta: float) -> void:
 
 	if is_dead or is_hurt:
 		return
+		
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	else:
 		jump_count = 0
+
+	# --- Input do Pulo (Modificado para preservar impulso aditivo) ---
+	if Input.is_action_just_pressed("ui_accept") and jump_count < MAX_JUMPS:
+		jump_count += 1
+		
+		if jump_count == 1:
+			velocity.y = JUMP_VELOCITY
+		else:
+			# Preserva a força subindo e adiciona o pulo duplo, ou reseta se estiver caindo
+			velocity.y = min(velocity.y, 0.0) + JUMP_VELOCITY
+			
+		if sfx_jump:
+			sfx_jump.play()
+		
+		is_sitting = false
+		is_shooting = false
+		if not is_attacking:
+			animation.flip_h = facing_direction < 0
+			if jump_count == 2:
+				animation.play("double_jump")
+			else:
+				animation.play("jump")
 
 	if Input.is_action_just_pressed("sit") and is_on_floor() and not is_attacking:
 		is_sitting = not is_sitting
@@ -148,10 +165,6 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return
 
-	if Input.is_action_just_pressed("ui_accept") and jump_count < MAX_JUMPS:
-		velocity.y = JUMP_VELOCITY
-		jump_count += 1
-
 	var current_speed = RUN_SPEED if Input.is_action_pressed("run") else SPEED
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction:
@@ -166,7 +179,6 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("shoot") and shoot_timer <= 0 and not is_overheated:
 		_shoot()
 
-	# Botão do ataque corpo a corpo (R)
 	if Input.is_action_just_pressed("attack"):
 		is_attacking = true
 		animation.flip_h = facing_direction < 0
@@ -182,11 +194,12 @@ func _physics_process(delta: float) -> void:
 		else:
 			is_shooting = false
 			if not is_on_floor():
-				animation.flip_h = facing_direction < 0
-				if jump_count == 2:
-					animation.play("double_jump")
-				else:
-					animation.play("jump")
+				if animation.animation != "jump" and animation.animation != "double_jump":
+					animation.flip_h = facing_direction < 0
+					if jump_count == 2:
+						animation.play("double_jump")
+					else:
+						animation.play("jump")
 			else:
 				var is_running = Input.is_action_pressed("run") and direction != 0
 				if is_running:
@@ -243,7 +256,7 @@ func _finalizar_minigame(sucesso: bool, tipo: String) -> void:
 	if sucesso:
 		is_overheated = false
 		if tipo == "perfeito":
-			current_heat = 0.0       
+			current_heat = 0.0        
 		elif tipo == "bom":
 			current_heat = 25.0      
 	else:
@@ -264,7 +277,6 @@ func _animate_gun_recoil() -> void:
 	tween.tween_property(animation, "position", original_pos, 0.08)
 	
 func take_damage(amount: int) -> void:
-	# Bloquea o dano caso o personagem esteja morto ou com I-frame
 	if is_dead or is_invulnerable:
 		return
 		
@@ -291,8 +303,6 @@ func take_damage(amount: int) -> void:
 	if hp <= 0:
 		is_dead = true
 		
-		if sfx_death:
-			sfx_death.play()
 		if hud:
 			hud.mostrar_tela_morte()
 			
@@ -323,7 +333,6 @@ func _apply_melee_damage() -> void:
 		hud = get_tree().get_first_node_in_group("hud")
 
 	var enemies = get_tree().get_nodes_in_group("villain")
-	var hit_connected = false
 	
 	for enemy in enemies:
 		var dist = global_position.distance_to(enemy.global_position)
@@ -333,33 +342,5 @@ func _apply_melee_damage() -> void:
 		
 		if dist <= 90.0 and is_facing_enemy:
 			enemy.take_damage(30, 400.0 * facing_direction)
-			hit_connected = true
 			if hud:
 				hud.mostrar_vida_inimigo("Ameaça Ciborgue", enemy.current_hp, enemy.max_hp)
-				
-	if hit_connected and sfx_melee_hit:
-		sfx_melee_hit.play()
-
-func _gerar_bip_provisorio(frequencia: float, duracao: float) -> AudioStreamWAV:
-	var stream = AudioStreamWAV.new()
-	stream.format = AudioStreamWAV.FORMAT_16_BITS
-	stream.mix_rate = 44100
-	stream.stereo = false
-	
-	var total_amostras = int(stream.mix_rate * duracao)
-	var bytes = PackedByteArray()
-	bytes.resize(total_amostras * 2) 
-	
-	for i in range(total_amostras):
-		var t = float(i) / stream.mix_rate
-		var amostra = sin(t * frequencia * 2.0 * PI)
-		
-		if i > total_amostras * 0.8:
-			var fator_fade = float(total_amostras - i) / (total_amostras * 0.2)
-			amostra *= fator_fade
-			
-		var valor_int = int(amostra * 32767.0) 
-		bytes.encode_s16(i * 2, valor_int)
-		
-	stream.data = bytes
-	return stream

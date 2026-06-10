@@ -52,6 +52,8 @@ func _process(delta: float) -> void:
 func mostrar_tela_morte() -> void:
 	if tela_morte:
 		tela_morte.show()
+		# Força o mouse a ficar visível e liberado para clicar nos botões
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _on_botao_reiniciar_pressed() -> void:
 	# Reinicia a fase

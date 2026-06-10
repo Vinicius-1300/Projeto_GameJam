@@ -324,3 +324,21 @@ theme_override_fonts/font = ExtResource("1_37p78")
 theme_override_font_sizes/font_size = 7
 text = "Espaço"
 label_settings = SubResource("LabelSettings_oo0fn")
+
+[node name="Label" type="Label" parent="." unique_id=676012586]
+offset_left = 174.0
+offset_top = 19.0
+offset_right = 193.0
+offset_bottom = 31.0
+theme_override_fonts/font = ExtResource("1_37p78")
+theme_override_font_sizes/font_size = 7
+text = "Vida"
+
+[node name="Label2" type="Label" parent="." unique_id=1820433070]
+offset_left = 173.0
+offset_top = 33.0
+offset_right = 203.0
+offset_bottom = 43.0
+theme_override_fonts/font = ExtResource("1_37p78")
+theme_override_font_sizes/font_size = 7
+text = "Escudo"

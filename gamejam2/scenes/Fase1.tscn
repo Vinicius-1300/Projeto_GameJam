@@ -13,6 +13,7 @@
 [ext_resource type="StyleBox" uid="uid://c48dvhjqn08d4" path="res://assets/ui/BotaoPress.tres" id="11_1duop"]
 [ext_resource type="StyleBox" uid="uid://dswyaxjohkyaa" path="res://assets/ui/BotaoHover.tres" id="12_2oe0w"]
 [ext_resource type="StyleBox" uid="uid://codogyi8qlvv3" path="res://assets/ui/BotaoFocus.tres" id="13_326es"]
+[ext_resource type="AudioStream" uid="uid://jrd764c1oyaf" path="res://assets/Music/Battle-Cadence.mp3" id="15_6ny51"]
 [ext_resource type="PackedScene" uid="uid://dc4n4onfmd37e" path="res://scenes/player.tscn" id="16_yeqnj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rb6wm"]
@@ -109,6 +110,7 @@ limit_bottom = 648
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=177205260]
 
 [node name="HUD" parent="CanvasLayer" unique_id=102744645 instance=ExtResource("8_opofi")]
+process_mode = 3
 
 [node name="TelaMorte" type="ColorRect" parent="CanvasLayer/HUD" unique_id=1245814096]
 visible = false
@@ -170,3 +172,9 @@ shape = SubResource("RectangleShape2D_48mec")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ParedeDireta" unique_id=694741123]
 position = Vector2(1000, 492)
 shape = SubResource("RectangleShape2D_48mec")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=664278238]
+stream = ExtResource("15_6ny51")
+autoplay = true
+bus = &"Musica"
+parameters/looping = true

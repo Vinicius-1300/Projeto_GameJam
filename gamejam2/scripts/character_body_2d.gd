@@ -8,6 +8,7 @@ extends CharacterBody2D
 var sfx_shoot: AudioStreamPlayer
 var sfx_hurt: AudioStreamPlayer
 var sfx_jump: AudioStreamPlayer
+var sfx_melee_hit: AudioStreamPlayer
 
 const SPEED = 200.0
 const RUN_SPEED = 400.0
@@ -48,7 +49,7 @@ var is_overheated = false
 
 var is_minigame_active = false
 var minigame_progress = 0.0
-const MINIGAME_SPEED = 0.31     
+const MINIGAME_SPEED = 0.25     
 
 # --- Limite de queda ---
 const FALL_LIMIT = 800.0
@@ -73,6 +74,12 @@ func _ready() -> void:
 	sfx_jump.stream = load("res://assets/SFX/som-pulo.mp3") 
 	sfx_jump.volume_db = -8.0
 	sfx_jump.bus = "SFX"
+	
+	sfx_melee_hit = AudioStreamPlayer.new()
+	add_child(sfx_melee_hit)
+	sfx_melee_hit.stream = load("res://assets/SFX/Soco-som.mp3") 
+	sfx_melee_hit.volume_db = -8.0
+	sfx_melee_hit.bus = "SFX"
 
 func _physics_process(delta: float) -> void:
 	if not hud:
@@ -102,13 +109,14 @@ func _physics_process(delta: float) -> void:
 		if minigame_progress >= 1.0:
 			_finalizar_minigame(false, "errado")
 		elif Input.is_action_just_pressed("shoot"):
-			if minigame_progress >= 0.20 and minigame_progress <= 0.30:
-				_finalizar_minigame(true, "perfeito")
-			elif minigame_progress >= 0.49 and minigame_progress <= 0.65:
-				_finalizar_minigame(true, "bom")
+			
+			if minigame_progress >= 0.15 and minigame_progress <= 0.35:
+				_finalizar_minigame(true, "perfeito") 
+			elif minigame_progress >= 0.50 and minigame_progress <= 0.77:
+				_finalizar_minigame(true, "bom") 
 			else:
-				_finalizar_minigame(false, "errado")
-
+				_finalizar_minigame(false, "errado") 
+				
 	elif current_heat > 0:
 		current_heat -= cooling_rate * delta
 		if current_heat < 0:
@@ -126,14 +134,12 @@ func _physics_process(delta: float) -> void:
 	else:
 		jump_count = 0
 
-	# --- Input do Pulo (Modificado para preservar impulso aditivo) ---
 	if Input.is_action_just_pressed("ui_accept") and jump_count < MAX_JUMPS:
 		jump_count += 1
 		
 		if jump_count == 1:
 			velocity.y = JUMP_VELOCITY
 		else:
-			# Preserva a força subindo e adiciona o pulo duplo, ou reseta se estiver caindo
 			velocity.y = min(velocity.y, 0.0) + JUMP_VELOCITY
 			
 		if sfx_jump:
@@ -250,6 +256,8 @@ func _iniciar_minigame_resfriamento() -> void:
 
 func _finalizar_minigame(sucesso: bool, tipo: String) -> void:
 	is_minigame_active = false
+	shoot_timer = SHOOT_COOLDOWN 
+	
 	if hud:
 		hud.esconder_minigame_resfriamento()
 	
@@ -333,6 +341,7 @@ func _apply_melee_damage() -> void:
 		hud = get_tree().get_first_node_in_group("hud")
 
 	var enemies = get_tree().get_nodes_in_group("villain")
+	var hit_connected = false
 	
 	for enemy in enemies:
 		var dist = global_position.distance_to(enemy.global_position)
@@ -342,5 +351,9 @@ func _apply_melee_damage() -> void:
 		
 		if dist <= 90.0 and is_facing_enemy:
 			enemy.take_damage(30, 400.0 * facing_direction)
+			hit_connected = true
 			if hud:
 				hud.mostrar_vida_inimigo("Ameaça Ciborgue", enemy.current_hp, enemy.max_hp)
+
+	if hit_connected and sfx_melee_hit:
+		sfx_melee_hit.play()

@@ -46,6 +46,7 @@ var hud = null
 # --- Áudio ---
 var sfx_hurt: AudioStreamPlayer
 var sfx_shoot: AudioStreamPlayer
+var sfx_death: AudioStreamPlayer
 
 func _ready() -> void:
 	add_to_group("villain")
@@ -64,6 +65,12 @@ func _ready() -> void:
 	sfx_shoot.stream = load("res://assets/SFX/tiro-chefe.mp3") 
 	sfx_shoot.volume_db = -6.0
 	sfx_shoot.bus = "SFX"
+	
+	sfx_death = AudioStreamPlayer.new()
+	add_child(sfx_death)
+	sfx_death.stream = load("res://assets/SFX/robô-morte.mp3") 
+	sfx_death.volume_db = -4.0
+	sfx_death.bus = "SFX"
 
 func _physics_process(delta: float) -> void:
 	if not player:
@@ -227,6 +234,10 @@ func _play_hurt() -> void:
 func _die() -> void:
 	is_dead = true
 	velocity = Vector2.ZERO
+	
+	if sfx_death:
+		sfx_death.play()
+		
 	animation.play("dead")
 
 func _on_animation_finished() -> void:

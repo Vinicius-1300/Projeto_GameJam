@@ -13,6 +13,8 @@
 [ext_resource type="StyleBox" uid="uid://c48dvhjqn08d4" path="res://assets/ui/BotaoPress.tres" id="11_1duop"]
 [ext_resource type="StyleBox" uid="uid://dswyaxjohkyaa" path="res://assets/ui/BotaoHover.tres" id="12_2oe0w"]
 [ext_resource type="StyleBox" uid="uid://codogyi8qlvv3" path="res://assets/ui/BotaoFocus.tres" id="13_326es"]
+[ext_resource type="AudioStream" uid="uid://boh4dxspttei5" path="res://assets/SFX/gameover-music.mp3" id="14_1duop"]
+[ext_resource type="AudioStream" uid="uid://c6qea81xnxsbl" path="res://assets/SFX/morte-kayla.mp3" id="15_2oe0w"]
 [ext_resource type="AudioStream" uid="uid://jrd764c1oyaf" path="res://assets/Music/Battle-Cadence.mp3" id="15_6ny51"]
 [ext_resource type="PackedScene" uid="uid://dc4n4onfmd37e" path="res://scenes/player.tscn" id="16_yeqnj"]
 
@@ -158,6 +160,17 @@ theme_override_styles/pressed = ExtResource("11_1duop")
 theme_override_styles/hover = ExtResource("12_2oe0w")
 theme_override_styles/focus = ExtResource("13_326es")
 text = "Tentar Novamente?"
+
+[node name="MusicaGameOver" type="AudioStreamPlayer" parent="CanvasLayer/HUD/TelaMorte" unique_id=1655650826]
+process_mode = 3
+stream = ExtResource("14_1duop")
+bus = &"Musica"
+
+[node name="SomMorte" type="AudioStreamPlayer" parent="CanvasLayer/HUD/TelaMorte" unique_id=1588742511]
+process_mode = 3
+stream = ExtResource("15_2oe0w")
+volume_db = 12.0
+bus = &"SFX"
 
 [node name="MenuPausa" parent="CanvasLayer" unique_id=63572861 instance=ExtResource("9_847xx")]
 

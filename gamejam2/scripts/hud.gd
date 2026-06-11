@@ -20,6 +20,8 @@ extends CanvasLayer
 # --- Tela de Morte ---
 @onready var tela_morte = $TelaMorte
 @onready var botao_reiniciar = $TelaMorte/BotaoReiniciar
+@onready var som_morte = $TelaMorte/SomMorte
+@onready var musica_game_over = $TelaMorte/MusicaGameOver
 
 var tempo_visivel_inimigo: float = 0.0
 
@@ -52,10 +54,23 @@ func _process(delta: float) -> void:
 func mostrar_tela_morte() -> void:
 	if tela_morte:
 		tela_morte.show()
+		
+		# Toca o som do impacto e a música
+		if som_morte:
+			som_morte.play()
+		if musica_game_over:
+			musica_game_over.play()
+			
+		# Pausa o jogo
+		get_tree().paused = true
+			
 		# Força o mouse a ficar visível e liberado para clicar nos botões
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _on_botao_reiniciar_pressed() -> void:
+	# Tira o jogo do pause antes de recarregar a cena, senão a nova fase já nasce congelada
+	get_tree().paused = false
+	
 	# Reinicia a fase
 	get_tree().reload_current_scene()
 

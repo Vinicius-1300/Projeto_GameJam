@@ -23,6 +23,10 @@ extends CanvasLayer
 @onready var som_morte = $TelaMorte/SomMorte
 @onready var musica_game_over = $TelaMorte/MusicaGameOver
 
+# --- Tela de Vitória ---
+@onready var tela_vitoria = $TelaVitoria
+@onready var botao_reiniciar_vitoria = $TelaVitoria/VBoxContainer/BotaoReiniciarVitoria
+
 var tempo_visivel_inimigo: float = 0.0
 
 # --- Variável de cooldown ---
@@ -41,8 +45,17 @@ func _ready() -> void:
 	if tela_morte:
 		tela_morte.hide()
 		
+	# Esconde a tela de vitória
+	if tela_vitoria:
+		tela_vitoria.hide()
+		
+	# Conecta o botão de reiniciar da tela de morte
 	if botao_reiniciar and not botao_reiniciar.pressed.is_connected(_on_botao_reiniciar_pressed):
 		botao_reiniciar.pressed.connect(_on_botao_reiniciar_pressed)
+		
+	# Conecta o botão de reiniciar da tela de vitória (usa a mesma função para facilitar)
+	if botao_reiniciar_vitoria and not botao_reiniciar_vitoria.pressed.is_connected(_on_botao_reiniciar_pressed):
+		botao_reiniciar_vitoria.pressed.connect(_on_botao_reiniciar_pressed)
 
 func _process(delta: float) -> void:
 	if painel_inimigo and painel_inimigo.visible:
@@ -55,16 +68,22 @@ func mostrar_tela_morte() -> void:
 	if tela_morte:
 		tela_morte.show()
 		
-		# Toca o som do impacto e a música
 		if som_morte:
 			som_morte.play()
 		if musica_game_over:
 			musica_game_over.play()
 			
-		# Pausa o jogo
 		get_tree().paused = true
-			
-		# Força o mouse a ficar visível e liberado para clicar nos botões
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+# --- Mostra a tela de vitória ---
+func mostrar_tela_vitoria() -> void:
+	if tela_vitoria:
+		tela_vitoria.show()
+		
+		# Se você adicionar um áudio de vitória na cena depois, pode dar o play() dele aqui
+		
+		get_tree().paused = true
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _on_botao_reiniciar_pressed() -> void:

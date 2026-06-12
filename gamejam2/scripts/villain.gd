@@ -250,7 +250,11 @@ func _on_animation_finished() -> void:
 	var anim = animation.animation
 
 	if anim == "dead":
+		# Mostra a tela de vitória quando a animação de explosão/morte terminar
+		if hud:
+			hud.mostrar_tela_vitoria()
 		queue_free()
+		
 	elif anim == "hurt":
 		is_hurt = false
 		is_attacking = false

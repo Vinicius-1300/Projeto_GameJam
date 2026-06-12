@@ -235,8 +235,14 @@ func _die() -> void:
 	is_dead = true
 	velocity = Vector2.ZERO
 	
+	# Toca o som de morte do chefe
 	if sfx_death:
 		sfx_death.play()
+		
+	# Acessa o nó pai (Node2D) e para a música da fase
+	var musica_fase = get_parent().get_node_or_null("AudioStreamPlayer")
+	if musica_fase:
+		musica_fase.stop()
 		
 	animation.play("dead")
 

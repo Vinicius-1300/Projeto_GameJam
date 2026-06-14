@@ -6,6 +6,7 @@
 [ext_resource type="StyleBox" uid="uid://c48dvhjqn08d4" path="res://assets/ui/BotaoPress.tres" id="4_5pdws"]
 [ext_resource type="StyleBox" uid="uid://dswyaxjohkyaa" path="res://assets/ui/BotaoHover.tres" id="5_hd3ao"]
 [ext_resource type="StyleBox" uid="uid://codogyi8qlvv3" path="res://assets/ui/BotaoFocus.tres" id="6_0i1j5"]
+[ext_resource type="AudioStream" uid="uid://d3kj82geek5te" path="res://assets/Music/musica-vitoria.mp3" id="8_0i1j5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_64ctp"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -386,3 +387,8 @@ theme_override_styles/pressed = ExtResource("4_5pdws")
 theme_override_styles/hover = ExtResource("5_hd3ao")
 theme_override_styles/focus = ExtResource("6_0i1j5")
 text = "Reiniciar fase?"
+
+[node name="MusicaVitoria" type="AudioStreamPlayer" parent="TelaVitoria" unique_id=1174227235]
+process_mode = 3
+stream = ExtResource("8_0i1j5")
+bus = &"Musica"

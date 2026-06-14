@@ -26,6 +26,7 @@ extends CanvasLayer
 # --- Tela de Vitória ---
 @onready var tela_vitoria = $TelaVitoria
 @onready var botao_reiniciar_vitoria = $TelaVitoria/VBoxContainer/BotaoReiniciarVitoria
+@onready var musica_vitoria = $TelaVitoria/MusicaVitoria
 
 var tempo_visivel_inimigo: float = 0.0
 
@@ -53,7 +54,7 @@ func _ready() -> void:
 	if botao_reiniciar and not botao_reiniciar.pressed.is_connected(_on_botao_reiniciar_pressed):
 		botao_reiniciar.pressed.connect(_on_botao_reiniciar_pressed)
 		
-	# Conecta o botão de reiniciar da tela de vitória (usa a mesma função para facilitar)
+	# Conecta o botão de reiniciar da tela de vitória
 	if botao_reiniciar_vitoria and not botao_reiniciar_vitoria.pressed.is_connected(_on_botao_reiniciar_pressed):
 		botao_reiniciar_vitoria.pressed.connect(_on_botao_reiniciar_pressed)
 
@@ -81,13 +82,15 @@ func mostrar_tela_vitoria() -> void:
 	if tela_vitoria:
 		tela_vitoria.show()
 		
-		# Se você adicionar um áudio de vitória na cena depois, pode dar o play() dele aqui
+		# Toca a música de vitória
+		if musica_vitoria:
+			musica_vitoria.play()
 		
 		get_tree().paused = true
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _on_botao_reiniciar_pressed() -> void:
-	# Tira o jogo do pause antes de recarregar a cena, senão a nova fase já nasce congelada
+	# Tira o jogo do pause antes de recarregar a cena
 	get_tree().paused = false
 	
 	# Reinicia a fase
